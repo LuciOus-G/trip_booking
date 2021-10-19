@@ -31,6 +31,7 @@ class Post(models.Model):
         if self.Token == '':
             self.Token = self.randomGenerate()
         self.seat = self.max_people
+        self.name = str(self.name).upper()
         super(Post, self).save(*args, **kwargs)
 
         all_image = []
