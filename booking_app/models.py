@@ -81,7 +81,7 @@ class PostImage(models.Model):
         return str(self.id)
 
 class carousel(models.Model):
-    image = models.ImageField(default=None, upload_to='media_thumbnail')
+    image = ResizedImageField(size=[1980, 1080], default=None, upload_to='media_thumbnail')
 
     def __str__(self):
         return "{}".format(self.id)
