@@ -12,7 +12,7 @@ class Post(models.Model):
     desc = models.TextField(default=None)
     date = models.DateField(auto_now_add=True)
     max_people = models.IntegerField(default=None)
-    photo1 = ResizedImageField(size=[1980, 1080], default=None, upload_to='thumbnail')
+    photo1 = ResizedImageField(size=[1980, 1080], default=None, upload_to='media_thumbnail')
     # day1 = models.DateField(blank=True, default=dt(2020, 10, 18), null=True, help_text="Today Date.")
     departure_day = models.DateField(default=dt(2020, 10, 18))
     Price = models.IntegerField(default=None)
@@ -81,7 +81,7 @@ class PostImage(models.Model):
         return str(self.id)
 
 class carousel(models.Model):
-    image = models.ImageField(default=None, upload_to='carousel')
+    image = models.ImageField(default=None, upload_to='media_thumbnail')
 
     def __str__(self):
         return "{}".format(self.id)
