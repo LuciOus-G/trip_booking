@@ -30,6 +30,7 @@ class Post(models.Model):
         self.slug = slugify(self.name)
         if self.Token == '':
             self.Token = self.randomGenerate()
+        self.seat = self.max_people
         super(Post, self).save(*args, **kwargs)
 
         all_image = []
