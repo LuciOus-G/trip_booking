@@ -146,6 +146,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_ROOT_PATH = "tripbooking"
+DROPBOX_ROOT_PATH = os.getenv("DBX_PATH")
 DROPBOX_OAUTH2_TOKEN = os.getenv("DBX_KEY")
 
