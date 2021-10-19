@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from datetime import date as dt
 from PIL import Image as Images
 import string,random
+from django_resized import ResizedImageField
 # Create your models here.
 
 class Post(models.Model):
@@ -11,7 +12,7 @@ class Post(models.Model):
     desc = models.TextField(default=None)
     date = models.DateField(auto_now_add=True)
     max_people = models.IntegerField(default=None)
-    photo1 = models.ImageField(default=None, upload_to='thumbnail')
+    photo1 = ResizedImageField(size=[1980, 1080], default=None, upload_to='thumbnail')
     # day1 = models.DateField(blank=True, default=dt(2020, 10, 18), null=True, help_text="Today Date.")
     departure_day = models.DateField(default=dt(2020, 10, 18))
     Price = models.IntegerField(default=None)
@@ -33,29 +34,29 @@ class Post(models.Model):
         self.seat = self.max_people
         self.name = str(self.name).upper()
 
-        all_image = []
-        img = Images.open(self.photo1.path)
-        all_image.append(img)
-        try:
-            img2 = Images.open(self.photo2.path)
-            all_image.append(img2)
-        except:
-            pass
-
-        try:
-            img3 = Images.open(self.photo3.path)
-            all_image.append(img3)
-        except:
-            pass
-
-        for x in all_image:
-            final = x.resize((1980, 1080))
-            if x == img:
-                final.save(self.photo1.path)
-            elif x == img2:
-                final.save(self.photo2.path)
-            elif x == img3:
-                final.save(self.photo3.path)
+        # all_image = []
+        # img = Images.open(self.photo1.path)
+        # all_image.append(img)
+        # try:
+        #     img2 = Images.open(self.photo2.path)
+        #     all_image.append(img2)
+        # except:
+        #     pass
+        #
+        # try:
+        #     img3 = Images.open(self.photo3.path)
+        #     all_image.append(img3)
+        # except:
+        #     pass
+        #
+        # for x in all_image:
+        #     final = x.resize((1980, 1080))
+        #     if x == img:
+        #         final.save(self.photo1.path)
+        #     elif x == img2:
+        #         final.save(self.photo2.path)
+        #     elif x == img3:
+        #         final.save(self.photo3.path)
         super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
