@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/styles_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flickity.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <div class="own-conrtainer" style="margin-bottom: 1%;">
+        <div class="main-carousel">
+            {% for slider in carousel %}
+                <div class="carousel-cell"><img class="img-fluid visible" style="width: 100%;height: 100%;" src="{{ slider.image.url }}"></div>
+            {% endfor %}
+        </div>
+        <div class="text-wrapper">
+            <h1 style="text-align: center;color: white; text-shadow: 2px 2px solid black;">BE SURE TO READ THE TERMS AND CONDITIONS</h1>
+            <h5 class="text-center text-light reveal">HARAP BACA SYARAT DAN KETENTUAN SEBELUM BOOKING AGAR DAPAT DIPAHAMI SUPAYA</h5>
+            <h5 class="text-center text-light reveal">TRIP DAPAT DITERIMA DAN BERJALAN DENGAN BAIK</h5>
+        </div>
+    </div>
+    <div class="container-content">
+        <h1 class="sperate" style="margin-left: 2%;">Trip</h1>
+        <div id="content" class="owl-carousel owl-theme" style="margin-top: 1%;margin-bottom: 1%;height: auto;">
+            {% for ctn in trip %}
+            {% if not forloop.counter > 20 %}
+                <div class="item" style="height: 100%;margin-right: 1%;margin-left: 1%;">
+                <div class="card" style="padding:1%;background-color:#f7f6e7;border: 1px solid;padding: 10px;box-shadow: 10px 10px;">
+                    <div class="card-body" style="padding: 0;padding-bottom: 1rem;">
+                        <div class="own-card">
+                          <img class="carousel-cell-image-own" src="{{ ctn.photo1.url }}" style="width: 100%;height:30%;border-radius: 5px;">
+                            <h5 class="card-title" style="padding-right: 1.25rem;padding-left: 1.25rem; padding-top:5%">{{ ctn.name }}</h5>
+                            <h6 class="text-muted card-subtitle mb-2" style="padding-right: 1.25rem;padding-left: 1.25rem;margin-bottom:2%;">{{ ctn.day }}</h6>
+                            <h6 class="paraph card-subtitle mb-2" style="padding-right: 1.25rem;padding-left: 1.25rem;padding-top:2%">Price : IDR. {{ ctn.Price }}</h6>
+                            <h6 class="paraph card-subtitle mb-2" style="padding-right: 1.25rem;padding-left: 1.25rem;">Meet Point : {{ ctn.meeting }}</h6>
+                            <a href="{% url 'mountain' slug=ctn.slug %}" id="button" class="btn btn-primary" type="button" style="margin-left: 1.25rem;margin-right: 1.25rem;">Book</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <h1 class="sperate" style="margin-left: 2%;">Special Trip</h1>
+        <div id="special" class="owl-carousel owl-theme" style="margin-top: 1%;margin-bottom: 1%;height: auto;">
+          {% for ctn in trip %}
+            {% if ctn.special %}
+              <div class="item" style="height: 100%;margin-right: 1%;margin-left: 1%;">
+                <div class="card">
+                    <div class="card-body" style="padding: 0;padding-bottom: 1rem;">
+                        <div class="own-card">
+
+                            <div class="carousel-own" data-flickity='{ "fade": true, "imagesLoaded": true}'>
+                                <div class="carousel-cell-own">
+                                    <img class="carousel-cell-image-own" src="{{ ctn.photo1.url }}" style="width: 100%;height:30%;border-radius: 5px;">
+                                </div>
+                                {% if ctn.photo2 %}
+                                <div class="carousel-cell-own">
+                                    <img class="carousel-cell-image-own" src="{{ ctn.photo2.url }}" style="width: 100%;height:30%;border-radius: 5px;">
+                                </div>
+                                {% endif %}
+                                {% if ctn.photo3 %}
+                                <div class="carousel-cell-own">
+                                    <img class="carousel-cell-image-own" src="{{ ctn.photo3.url }}" style="width: 100%;height:30%;border-radius: 5px;">
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <h5 class="card-title" style="padding-right: 1.25rem;padding-left: 1.25rem; padding-top:5%">{{ ctn.name }}</h5>
+                            <h6 class="text-muted card-subtitle mb-2" style="padding-right: 1.25rem;padding-left: 1.25rem;margin-bottom:2%;">{{ ctn.day }}</h6>
+                            <h6 class="paraph card-subtitle mb-2" style="padding-right: 1.25rem;padding-left: 1.25rem;padding-top:2%">Price : Rp {{ ctn.Price|floatformat:2|intcomma }}</h6>
+                            <h6 class="paraph card-subtitle mb-2" style="padding-right: 1.25rem;padding-left: 1.25rem;">Meet Point : {{ ctn.meeting }}</h6>
+                            <button id="button" class="btn btn-primary" type="button" style="margin-left: 1.25rem;margin-right: 1.25rem;">Book</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/flickity.pkgd.js' %}"></script>
+    <script src="{% static 'js/fontawesome.js' %}"></script>
+    <script src="{% static 'js/jquery.fittext.js' %}"></script>
+    <script src="{% static 'js/script_home.js' %}"></script>
+    <script src="{% static 'js/jquery3.min.js' %}"></script>
+    <script>
+        ScrollReveal().reveal('.reveal, #content, #special', {
+            delay:500,
+            reset:true,
+            distance:'100px',
+        });
+    </script>
+{% endblock script %}
