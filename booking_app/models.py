@@ -32,7 +32,6 @@ class Post(models.Model):
             self.Token = self.randomGenerate()
         self.seat = self.max_people
         self.name = str(self.name).upper()
-        super(Post, self).save(*args, **kwargs)
 
         all_image = []
         img = Images.open(self.photo1.path)
@@ -57,6 +56,7 @@ class Post(models.Model):
                 final.save(self.photo2.path)
             elif x == img3:
                 final.save(self.photo3.path)
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return "{}, {}, person {}".format(self.id, self.name, self.seat)
