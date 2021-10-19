@@ -86,11 +86,11 @@ class carousel(models.Model):
     def __str__(self):
         return "{}".format(self.id)
 
-    def save(self, *args, **kwargs):
-        super(carousel, self).save(*args, **kwargs)
-        img = Images.open(self.image.path)
-        img = img.resize((1980, 1080))
-        img.save(self.image.path)
+    # def save(self, *args, **kwargs):
+    #     super(carousel, self).save(*args, **kwargs)
+    #     img = Images.open(self.image.path)
+    #     img = img.resize((1980, 1080))
+    #     img.save(self.image.path)
 
 
 class booking(models.Model):
