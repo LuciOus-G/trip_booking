@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    '192.168.0.100'
+    '192.168.0.100',
+    'trip-booking-app.herokuapp.com'
 ]
 
 
@@ -90,11 +91,10 @@ WSGI_APPLICATION = 'booking.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'booking_DB',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',   #my port is 3306
+        'NAME': 'heroku_f135998e61255ef',
+        'USER': 'b752594cf4efd8',
+        'PASSWORD': 'a0850e79',
+        'HOST': 'us-cdbr-east-04.cleardb.com'
     }
 }
 
