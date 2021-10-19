@@ -144,3 +144,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+DROPBOX_ROOT_PATH = "tripbooking"
+DROPBOX_OAUTH2_TOKEN = "sl.A6ohwdP353tW4jRvfOxQFH4qwfCyDpZIzZuIG0sEsL32XaGtuOgLQJwxouGHfbF3mg5O8FAxm42Vf89ACid1Nhmt992XpIYExmH9icNajC61K2m_WReor_GPeLrgYCFzsZHKHHZLfKnH"
+
