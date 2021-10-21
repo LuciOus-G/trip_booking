@@ -8,6 +8,7 @@ from django.db.models import F
 from django.contrib.auth.decorators import login_required
 from django.http import QueryDict
 from django.db import connection
+from django.db.models import Q
 
 # Create your views here.
 
@@ -134,4 +135,14 @@ def termcondition(request):
     return render(request, 'termcondition.html', {'image': image_db})
 
 def search(request):
-    return render(request, 'list.html')
+    search_q = request.POST.get("search")
+    if request.method == "POST":
+        mount = models.Post.objects.filter(Q(name__icontains=search_q))
+    else:
+        mount = models.Post.objects.all()
+
+    context = {
+        "data": mount,
+        "his_search": search_q
+    }
+    return render(request, 'list.html', context)

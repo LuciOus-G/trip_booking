@@ -7,21 +7,43 @@
 {% endblock css %}
 
 {% block content %}
-  <div class="container">
+  <div class="container text-center">
     <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action">
+      <div class="list-group-item list-group-item-action list-group-item-dark">
         <div class="row">
-          <div class="col-6">
-            1 of 3
-          </div>
-          <div class="col">
-            2 of 3
-          </div>
+          <form class="col-5 text-left" method="POST">{% csrf_token %}
+              Nama Gunung
+              <span>
+                <input type="text" name="search" style="border:none;border-radius:5px;padding:.5%"
+                       {% if his_search %} placeholder="{{ his_search }}" {%else%} placeholder="Find Here" {% endif %}
+                >
+              </span>
+          </form>
+            <div class="col">
+              Kategori Provinsi
+            </div>
           <div class="col text-right">
-            3 of 3
+            dilihat
           </div>
         </div>
-      </a>
+      </div>
+
+      {% for dats in data %}
+        <a href="{% url 'mountain' slug=dats.slug %}" class="list-group-item list-group-item-action">
+          <div class="row">
+            <div class="col-5 text-left">
+              {{ dats.name }}
+            </div>
+            <div class="col">
+              {{ dats.categories }}
+            </div>
+            <div class="col text-right">
+              {{ dats.viewer }}
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+
     </div>
   </div>
 {% endblock content %}
