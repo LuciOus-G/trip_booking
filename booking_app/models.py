@@ -9,6 +9,7 @@ from django_resized import ResizedImageField
 class category(models.Model):
     category_name = models.CharField(max_length=255, default='')
 
+
 class Post(models.Model):
     name = models.CharField(max_length=100, default=None)
     slug = models.SlugField(blank=True, editable=False, max_length=255)
@@ -25,7 +26,7 @@ class Post(models.Model):
     special_desc = models.TextField(default=None, blank=True, null=True)
     special_desc = models.TextField(default=None, blank=True, null=True, max_length=620)
     Token = models.CharField(max_length=255, unique=True, blank=True, editable=False, default='')
-    category = models.OneToOneField(category, on_delete=models.CASCADE, blank=True, null=True)
+    categories = models.ForeignKey(category, on_delete=models.CASCADE, default='')
     viewer = models.IntegerField(default=0)
 
 
