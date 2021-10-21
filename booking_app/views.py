@@ -98,7 +98,7 @@ def mountain(request, slug):
     }
     mount.viewer  = mount.viewer + 1
     print(mount.viewer)
-    # mount.save()
+    mount.save()
     return render(request, 'mountain.html', context)
 
 def book_field(request):
