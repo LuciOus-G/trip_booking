@@ -9,6 +9,9 @@ from django_resized import ResizedImageField
 class category(models.Model):
     category_name = models.CharField(max_length=255, default='')
 
+    def __str__(self):
+        return f"{self.category_name}"
+
 
 class Post(models.Model):
     name = models.CharField(max_length=100, default=None)
