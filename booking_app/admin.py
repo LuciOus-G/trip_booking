@@ -7,7 +7,7 @@ class bookingAdmin(admin.ModelAdmin):
     readonly_fields = ['books_ids', 'name_trip', 'price', ]
 
 class slugify(admin.ModelAdmin):
-    readonly_fields = ['slug', 'seat']
+    readonly_fields = ['slug', 'seat', 'viewer']
 
 class PostImageAdmin(admin.StackedInline):
     model = models.PostImage

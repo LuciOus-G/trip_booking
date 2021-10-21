@@ -90,12 +90,14 @@ def preview(request):
 # @login_required(redirect_field_name='mountain')
 def mountain(request, slug):
     mount = models.Post.objects.get(slug=slug)
+
     isfull = int(mount.seat) == 0
-    print(isfull)
     context = {
         'mount': mount,
         'isfull':isfull
     }
+    mount.viewer += 1
+    mount.save()
     return render(request, 'mountain.html', context)
 
 def book_field(request):

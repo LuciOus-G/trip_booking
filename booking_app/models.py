@@ -22,6 +22,9 @@ class Post(models.Model):
     special_desc = models.TextField(default=None, blank=True, null=True)
     special_desc = models.TextField(default=None, blank=True, null=True, max_length=620)
     Token = models.CharField(max_length=255, unique=True, blank=True, editable=False, default='')
+    # category = models.OneToOneField(category, on_delete=models.CASCADE)
+    viewer = models.IntegerField(default=0)
+
 
     class Meta:
         verbose_name = u'Trip'
@@ -35,29 +38,6 @@ class Post(models.Model):
             self.seat = self.max_people
         self.name = str(self.name).upper()
 
-        # all_image = []
-        # img = Images.open(self.photo1.path)
-        # all_image.append(img)
-        # try:
-        #     img2 = Images.open(self.photo2.path)
-        #     all_image.append(img2)
-        # except:
-        #     pass
-        #
-        # try:
-        #     img3 = Images.open(self.photo3.path)
-        #     all_image.append(img3)
-        # except:
-        #     pass
-        #
-        # for x in all_image:
-        #     final = x.resize((1980, 1080))
-        #     if x == img:
-        #         final.save(self.photo1.path)
-        #     elif x == img2:
-        #         final.save(self.photo2.path)
-        #     elif x == img3:
-        #         final.save(self.photo3.path)
         super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -75,6 +55,9 @@ class Post(models.Model):
             randomGenerate(size=size + 1)
         return generate
 
+class category(models.Model):
+    category_name = models.CharField(max_length=255, default='')
+
 class PostImage(models.Model):
     images = models.ImageField(upload_to='images/')
 
@@ -86,12 +69,6 @@ class carousel(models.Model):
 
     def __str__(self):
         return "{}".format(self.id)
-
-    # def save(self, *args, **kwargs):
-    #     super(carousel, self).save(*args, **kwargs)
-    #     img = Images.open(self.image.path)
-    #     img = img.resize((1980, 1080))
-    #     img.save(self.image.path)
 
 
 class booking(models.Model):
