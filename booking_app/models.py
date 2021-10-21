@@ -6,6 +6,9 @@ import string,random
 from django_resized import ResizedImageField
 # Create your models here.
 
+class category(models.Model):
+    category_name = models.CharField(max_length=255, default='')
+
 class Post(models.Model):
     name = models.CharField(max_length=100, default=None)
     slug = models.SlugField(blank=True, editable=False, max_length=255)
@@ -22,7 +25,7 @@ class Post(models.Model):
     special_desc = models.TextField(default=None, blank=True, null=True)
     special_desc = models.TextField(default=None, blank=True, null=True, max_length=620)
     Token = models.CharField(max_length=255, unique=True, blank=True, editable=False, default='')
-    # category = models.OneToOneField(category, on_delete=models.CASCADE)
+    category = models.OneToOneField(category, on_delete=models.CASCADE, default='')
     viewer = models.IntegerField(default=0)
 
 
@@ -54,9 +57,6 @@ class Post(models.Model):
         if qs:
             randomGenerate(size=size + 1)
         return generate
-
-class category(models.Model):
-    category_name = models.CharField(max_length=255, default='')
 
 class PostImage(models.Model):
     images = models.ImageField(upload_to='images/')
