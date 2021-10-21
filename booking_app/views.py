@@ -96,8 +96,7 @@ def mountain(request, slug):
         'mount': mount,
         'isfull':isfull
     }
-    mount.viewer  = mount.viewer + 1
-    print(mount.viewer)
+    mount.viewer  = str(int(mount.viewer) + 1)
     mount.save()
     return render(request, 'mountain.html', context)
 

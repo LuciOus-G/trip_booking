@@ -30,7 +30,7 @@ class Post(models.Model):
     special_desc = models.TextField(default=None, blank=True, null=True, max_length=620)
     Token = models.CharField(max_length=255, unique=True, blank=True, editable=False, default='')
     categories = models.ForeignKey(category, on_delete=models.CASCADE, default='')
-    viewer = models.IntegerField(blank=True, null=True)
+    viewer = models.CharField(max_length=1000, default='')
 
 
     class Meta:
