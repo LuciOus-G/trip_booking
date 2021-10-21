@@ -99,11 +99,9 @@ def mountain(request, slug):
         'isfull':isfull
     }
     inc_viewer = str(int(mount.viewer) + 1)
-    print(inc_viewer)
     with connection.cursor() as cur:
         cur.execute(f"UPDATE heroku_f135998e61255ef.booking_app_post SET viewer={inc_viewer} WHERE id={mount.id};")
         row = cur.fetchone()
-    print(mount.viewer)
 
     return render(request, 'mountain.html', context)
 
@@ -134,3 +132,6 @@ def book_list(request):
 def termcondition(request):
     image_db = models.PostImage.objects.all()
     return render(request, 'termcondition.html', {'image': image_db})
+
+def search(request):
+    return render(request, 'list.html')
