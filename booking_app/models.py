@@ -12,7 +12,6 @@ class category(models.Model):
     def __str__(self):
         return f"{self.category_name}"
 
-
 class Post(models.Model):
     name = models.CharField(max_length=100, default=None)
     slug = models.SlugField(blank=True, editable=False, max_length=255)
@@ -44,7 +43,6 @@ class Post(models.Model):
         if not self.seat:
             self.seat = self.max_people
         self.name = str(self.name).upper()
-
         super(Post, self).save(*args, **kwargs)
 
     def __str__(self):

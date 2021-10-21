@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import F
 from django.contrib.auth.decorators import login_required
 from django.http import QueryDict
+from django.db import connection
+
 # Create your views here.
 
 def home(request):
@@ -96,8 +98,13 @@ def mountain(request, slug):
         'mount': mount,
         'isfull':isfull
     }
-    mount.viewer  = str(int(mount.viewer) + 1)
-    mount.save()
+    inc_viewer = str(int(mount.viewer) + 1)
+    print(inc_viewer)
+    with connection.cursor() as cur:
+        cur.execute(f"UPDATE heroku_f135998e61255ef.booking_app_post SET viewer={inc_viewer} WHERE id={mount.id};")
+        row = cur.fetchone()
+    print(mount.viewer)
+
     return render(request, 'mountain.html', context)
 
 def book_field(request):
