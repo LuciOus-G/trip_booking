@@ -25,7 +25,7 @@ class Post(models.Model):
     special_desc = models.TextField(default=None, blank=True, null=True)
     special_desc = models.TextField(default=None, blank=True, null=True, max_length=620)
     Token = models.CharField(max_length=255, unique=True, blank=True, editable=False, default='')
-    category = models.OneToOneField(category, on_delete=models.CASCADE, default='')
+    category = models.OneToOneField(category, on_delete=models.CASCADE, blank=True, null=True)
     viewer = models.IntegerField(default=0)
 
 

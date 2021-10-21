@@ -12,13 +12,20 @@ class slugify(admin.ModelAdmin):
 class PostImageAdmin(admin.StackedInline):
     model = models.PostImage
 
+class PostCategoryAdmin(admin.StackedInline):
+    model = models.category
+
 class PostAdmin(admin.ModelAdmin):
-    inlines = [PostImageAdmin]
+    inlines = [PostImageAdmin, PostCategoryAdmin]
 
     class Meta:
         model = models.Post
 
 @admin.register(models.PostImage)
+class PostImageAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(models.category)
 class PostImageAdmin(admin.ModelAdmin):
     pass
 
